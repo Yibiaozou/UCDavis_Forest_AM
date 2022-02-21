@@ -15,7 +15,7 @@ library(ROCR)
 ###############################################################
 #-------------------loading data set---------------------------
 #-----dispersal kernel------
-load(".../Global_dispersal_kernel_5m_2D_23spp.RData")
+load(".../GDK_4d.RData")
 # GDK, two dimensional dispersal kernel
 
 #-------Climate data during clmate change-------
