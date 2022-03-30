@@ -461,7 +461,7 @@ AM <- function(Forbiome,P,X,dy,Biomass,dkSPool,Strategy=1,Seed=F){
     FireTargetSite <- landscape[AMDestination[ts,]==1 & FireRegime>0]
     AMsite <- landscape[Abundance[ts,]>0 & AMDestination[ts,]==0]
     LandFireLY[AMDestination[ts,]==0] <- -1 
-    if(Seed==F){
+    if(Seed==F){ # seedling assisted migration
       for(i in 1:AMSiteNum){
         j <- sample(AMsite,size=1,prob=rep(1/length(AMsite),length(AMsite)))
         AMForest <- matrix(0,nrow=19,ncol=AMseedlingNum)
@@ -473,7 +473,7 @@ AM <- function(Forbiome,P,X,dy,Biomass,dkSPool,Strategy=1,Seed=F){
         kC <- -gs/kB[AMForest[1,]]
         AMForest[17,] <- 137 + kB[AMForest[1,]]*(1-exp(kC*AMForest[nid$dbh,]))
         # post-fire would be added here
-        if(Strategy==1){ # minimum biomass/open canopy assisted migration
+        if(Strategy==1){ # least competition/open canopy assisted migration
           RsLocation<- order(SiteBiom[TargetSite])[i]
           Rs <- TargetSite[RsLocation]
           # browser()
@@ -502,7 +502,7 @@ AM <- function(Forbiome,P,X,dy,Biomass,dkSPool,Strategy=1,Seed=F){
         tick <- tick + 1
       }
     }
-    if(Seed==T){
+    if(Seed==T){ # seed assisted migration
       for(i in 1:AMSiteNum){
         j <- sample(AMsite,size=1,prob=rep(1/length(AMsite),length(AMsite)))
         if(Strategy==1){
